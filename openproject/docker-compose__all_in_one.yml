@@ -1,0 +1,21 @@
+services:
+  openproject_db_externo:
+    image: openproject/openproject:15.2.0
+    container_name: openproject_openproject
+    restart: always
+    ports:
+      - "80:8080" # Expoem a porta 8080 do OpenProject para a porta 80 do host.
+      - "5432:5432" # Expoem a porta 5432 para o banco de dados.
+    environment:
+      OPENPROJECT_DEFAULT__LANGUAGE: pt-BR
+      OPENPROJECT_SECRET_KEY_BASE: "chave_para_criptografia" 
+      OPENPROJECT_HOST__NAME: "localhost" # Troque que seu domínio, sem http:// ou https://
+      OPENPROJECT_HTTPS: false # Se você usa https, coloque true.
+      RAILS_MIN_THREADS: 1
+      RAILS_MAX_THREADS: 4
+      # set to true to enable the email receiving feature. See ./docker/cron for more options
+      IMAP_ENABLED: false
+      POSTGRES_USER: postgres # Usuário do banco de dados.
+      POSTGRES_PASSWORD: chave_user_postgres # Senha do usuário postgres.
+      POSTGRES_DB: openproject # Nome do banco de dados.
+      

@@ -1,0 +1,17 @@
+services:
+  openproject_db_externo:
+    image: openproject/openproject:15.2.0
+    container_name: openproject_openproject
+    restart: always
+    ports:
+      - "80:8080"
+    environment:
+      OPENPROJECT_DEFAULT__LANGUAGE: pt-BR
+      OPENPROJECT_SECRET_KEY_BASE: "chave_para_criptografia" 
+      OPENPROJECT_HOST__NAME: "localhost" # Troque que seu domínio, sem http:// ou https://
+      OPENPROJECT_HTTPS: false # Se você usa https, coloque true
+      RAILS_MIN_THREADS: 1
+      RAILS_MAX_THREADS: 4
+      # set to true to enable the email receiving feature. See ./docker/cron for more options
+      IMAP_ENABLED: false
+      DATABASE_URL: "postgres://usuario:senha@host_postgres:5432/database_name"
