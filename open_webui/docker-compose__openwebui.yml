@@ -1,0 +1,23 @@
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:cuda
+    container_name: open-webui
+  #  restart: always
+    networks:
+      - host
+    # ports:
+    #   - "3000:8080"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    #volumes:
+     # - open-webui:/app/backend/data
+    # extra_hosts:
+    #   - "host.docker.internal:host-gateway"
+
+#volumes:
+ # open-webui:
